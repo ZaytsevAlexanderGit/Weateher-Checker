@@ -1,5 +1,6 @@
 export const Routes = {
   ROOT: '/',
+  MAP: '/map',
   // PROFILE: '/profile',
   // BLOG: '/blog',
   // POLICY: '/policy',

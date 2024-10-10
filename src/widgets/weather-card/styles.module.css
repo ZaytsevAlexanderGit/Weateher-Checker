@@ -1,0 +1,43 @@
+.header {
+    font-size: 1.5em;
+}
+
+.card {
+    display:grid;
+    inline-size: 100%;
+}
+
+.card__data {
+    display:grid;
+    grid-template-columns: 35% 20% 45%;
+    justify-content: center;
+    justify-items: center;
+}
+
+.card__data_date {
+    display:grid;
+    align-content: center;
+    justify-items: center;
+}
+
+.card__data_main {
+    display:grid;
+    justify-items: end;
+}
+
+p {
+    font-size:15px;
+    align-self: center;
+}
+
+.image {
+    filter: drop-shadow(0px 0px 25px #A1A5A5) ;
+    align-self: center;
+    inline-size: 60px;
+    user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}

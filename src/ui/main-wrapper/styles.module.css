@@ -1,20 +1,19 @@
 .wrapper {
-    max-width: 1255px;
+    max-width: 1280px;
     margin: 0 auto;
-    min-height: 1024px;
-    height: 100vh;
+    width:  80vw;
     display: block;
     position: relative;
 }
 
-@media screen and (max-width: 1300px) {
-    .wrapper {
-        margin: 0 25px;
-    }
-}
+/*@media screen and (max-width: 1300px) {*/
+/*    .wrapper {*/
+/*        margin: 0 25px;*/
+/*    }*/
+/*}*/
 
-@media screen and (max-width: 920px) {
-    .wrapper {
-        min-height: auto;
-    }
-}
+/*@media screen and (max-width: 920px) {*/
+/*    .wrapper {*/
+/*        min-height: auto;*/
+/*    }*/
+/*}*/

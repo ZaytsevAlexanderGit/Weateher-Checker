@@ -8,6 +8,6 @@
 
 .footer__image {
     height: 100%;
-    background-image: url('/public/bottom-bar.svg');
+    /*background-image: url('/public/bottom-bar.svg');*/
     background-size: cover;
 }

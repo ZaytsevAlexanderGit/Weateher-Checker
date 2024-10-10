@@ -15,7 +15,7 @@ interface IWeatherDetailedState {
   getDetailedWeather: (city: string) => void;
 }
 
-const appKey = import.meta.env.VITE_API_KEY;
+const appKey = import.meta.env.VITE_API_WEATHER_KEY;
 
 export const useWeatherDetailed = create<IWeatherDetailedState>()(
   devtools((set) => ({
@@ -25,7 +25,10 @@ export const useWeatherDetailed = create<IWeatherDetailedState>()(
     setDetailedWeather: (data: apiDetailedWeatherData) =>
       set({ dataDetailed: data }),
     setDetailedFakeWeather: () => {
-      setTimeout(() => set({ dataDetailed: fakeDetailedWeatherData }), 1000);
+      set({ loading: true });
+      set({ dataDetailed: fakeDetailedWeatherData });
+      set({ error: null });
+      setTimeout(() => set({ loading: false }), 1000);
     },
     getDetailedWeather: async (city: string) => {
       set({ loading: true });
