@@ -7,13 +7,25 @@ import { useMediaQuery } from '../../shared/hooks';
 import { Logo } from '../../ui';
 
 import styles from './styles.module.css';
+import { DropDownMenu, MenuButton } from './components';
+import { SyntheticEvent, useState } from 'react';
 
 export const Header = () => {
   const isMobile = useMediaQuery(Breakpoints.L);
 
+  const [menuActive, setMenuActive] = useState<boolean>(false);
+
+  const handleClick = (evt: SyntheticEvent) => {
+    evt.stopPropagation();
+    setMenuActive(!menuActive);
+  };
+
   const headerStyles = cn(styles.header, { [styles.header_mobile]: isMobile });
   const headerLogoStyles = cn(styles.header__logo, {
     [styles.header__logo_mobile]: isMobile,
+  });
+  const headerItemStyles = cn(styles.header__menu__item, {
+    [styles.header__menu__item_mobile]: isMobile,
   });
 
   return (
@@ -22,46 +34,31 @@ export const Header = () => {
         <NavLink className={headerLogoStyles} to={Routes.ROOT}>
           <Logo />
         </NavLink>
-        <NavLink className={headerLogoStyles} to={Routes.ROOT}>
-          Главная
-        </NavLink>
-        <NavLink className={headerLogoStyles} to={Routes.MAP}>
-          Карта
-        </NavLink>
-        {/*{isAdmin*/}
-        {/*  ? !isMobile && (*/}
-        {/*      <SideBar position={positionConfigTop} links={linksTopAuthAdmin} />*/}
-        {/*    )*/}
-        {/*  : !isMobile && (*/}
-        {/*      <SideBar position={positionConfigTop} links={linksTop} />*/}
-        {/*    )}*/}
+        {!isMobile && (
+          <>
+            <NavLink className={headerItemStyles} to={Routes.ROOT}>
+              Главная
+            </NavLink>
+            <NavLink className={headerItemStyles} to={Routes.MAP}>
+              Карта
+            </NavLink>
+            <NavLink className={headerItemStyles} to={Routes.CONTACTS}>
+              Контакты
+            </NavLink>
+          </>
+        )}
+        {isMobile && (
+          <MenuButton
+            onClick={handleClick}
+            isMobile={isMobile}
+            isActive={menuActive}
+          />
+        )}
 
-        {/*<div className={headerMenuStyles}>*/}
-        {/*  {Boolean(user) && (*/}
-        {/*    <MenuButton onClick={handleClick} isMobile={isMobile} />*/}
-        {/*  )}*/}
-
-        {/*{menuActive && (*/}
-        {/*  <DropDownMenu*/}
-        {/*    role={user?.role}*/}
-        {/*    setMenuActive={setMenuActive}*/}
-        {/*    menuActive={menuActive}*/}
-        {/*    setIsOpenChat={handleOpen}*/}
-        {/*  />*/}
-        {/*)}*/}
+        {isMobile && (
+          <DropDownMenu setIsActive={setMenuActive} isActive={menuActive} />
+        )}
       </div>
-
-      {/*{isOpen && (*/}
-      {/*  <PopupChat*/}
-      {/*    isOpen={isOpen}*/}
-      {/*    onClick={isOpen ? handleClose : handleOpen}*/}
-      {/*    messages={[]}*/}
-      {/*    chatmateInfo={infoAdmin}*/}
-      {/*    onAttachFileClick={() => {}}*/}
-      {/*  />*/}
-      {/*)}*/}
-
-      {/*{isMobile && <div className={styles['header__gradient-divider']}></div>}*/}
     </header>
   );
 };

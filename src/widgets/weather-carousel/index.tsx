@@ -25,10 +25,16 @@ export const WeatherCarousel = ({ data, isOpen }: IWeatherCarouselProps) => {
     const walk = (x - startX) * 0.75;
     itemsRef.current!.scrollLeft = scrollLeft - walk;
   };
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     setIsMouseDown(false);
   };
-  const handleMouseUp = () => {
+  const handleMouseUp = (e: MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    e.nativeEvent.stopImmediatePropagation();
     setIsMouseDown(false);
   };
 
@@ -44,7 +50,9 @@ export const WeatherCarousel = ({ data, isOpen }: IWeatherCarouselProps) => {
           style={{
             opacity: isOpen ? 1 : 0,
             transition: 'all  0.3s ease-in-out, opacity 0.6s ease-in-out',
-            height: isOpen ? '120px' : '0px',
+            height: isOpen
+              ? 'clamp(5.25rem, 1.938rem + 7.8vi, 6.813rem)'
+              : '0px',
             marginTop: isOpen ? '16px' : '0px',
           }}
           className={styles.list}
@@ -57,12 +65,16 @@ export const WeatherCarousel = ({ data, isOpen }: IWeatherCarouselProps) => {
         >
           {data.list.map((item) => (
             <li className={styles.listItem} key={item.dt_txt}>
-              <p>{item.dt_txt.slice(11, -3)}</p>
+              <p className={styles.carousel__text}>
+                {item.dt_txt.slice(11, -3)}
+              </p>
               <img
                 className={styles.image}
                 src={`/icons/${item.weather[0].icon}.svg`}
               />
-              <p>{item.main.temp} C</p>
+              <p className={styles.carousel__text}>
+                {-(-item.main.temp.toFixed(1))}&nbsp;&deg;C
+              </p>
             </li>
           ))}
         </ul>

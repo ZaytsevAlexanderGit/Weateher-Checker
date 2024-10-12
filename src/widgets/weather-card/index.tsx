@@ -7,6 +7,7 @@ interface IWeatherCard {
 
 export const WeatherCard = ({ data }: IWeatherCard) => {
   const options: Intl.DateTimeFormat = {
+    // @ts-expect-error options
     weekday: 'long',
     month: 'long',
     day: '2-digit',
@@ -20,6 +21,7 @@ export const WeatherCard = ({ data }: IWeatherCard) => {
             <h2 className={styles.header}>
               {
                 new Date(data.date.slice(0, 10))
+                  // @ts-expect-error options
                   .toLocaleDateString('ru', options)
                   .split(',')[1]
               }
@@ -27,6 +29,7 @@ export const WeatherCard = ({ data }: IWeatherCard) => {
             <h2 className={styles.header}>
               {
                 new Date(data.date.slice(0, 10))
+                  // @ts-expect-error options
                   .toLocaleDateString('ru', options)
                   .split(',')[0]
               }
@@ -37,13 +40,19 @@ export const WeatherCard = ({ data }: IWeatherCard) => {
             src={`/icons/${data.weather[0].icon}.svg`}
           />
           <div className={styles.card__data_main}>
-            <p>
-              Температура - {data.main.temp} {String.fromCharCode(176)}C (
-              {data.main.temp_min} - {data.main.temp_max}){' '}
-              {String.fromCharCode(176)}C
+            <p className={styles.card__data_main_text}>
+              Температура:&nbsp;<strong>{data.main.temp}</strong>
+              &nbsp;&deg;C (<strong>{data.main.temp_min}</strong>
+              &nbsp;&mdash;&nbsp;<strong>{data.main.temp_max}</strong>
+              )&nbsp;&deg;C
             </p>
-            <p>Давление - {data.main.pressure} мм.рт.ст.</p>
-            <p>Влажность - {data.main.humidity}%</p>
+            <p className={styles.card__data_main_text}>
+              Давление: <strong>{data.main.pressure}</strong>
+              &nbsp;мм.рт.ст.
+            </p>
+            <p className={styles.card__data_main_text}>
+              Влажность: <strong>{data.main.humidity}</strong>%
+            </p>
           </div>
         </div>
       </div>

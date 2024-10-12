@@ -1,19 +1,8 @@
 .wrapper {
-    max-width: 1280px;
+    max-inline-size: 1280px;
     margin: 0 auto;
-    width:  80vw;
+    inline-size:  80vw;
     display: block;
     position: relative;
+    min-block-size:  100dvh;
 }
-
-/*@media screen and (max-width: 1300px) {*/
-/*    .wrapper {*/
-/*        margin: 0 25px;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 920px) {*/
-/*    .wrapper {*/
-/*        min-height: auto;*/
-/*    }*/
-/*}*/
