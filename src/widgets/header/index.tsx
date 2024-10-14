@@ -1,4 +1,3 @@
-// import { SyntheticEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import cn from 'classnames';
 
@@ -38,9 +37,6 @@ export const Header = () => {
           <>
             <NavLink className={headerItemStyles} to={Routes.ROOT}>
               Главная
-            </NavLink>
-            <NavLink className={headerItemStyles} to={Routes.MAP}>
-              Карта
             </NavLink>
             <NavLink className={headerItemStyles} to={Routes.CONTACTS}>
               Контакты

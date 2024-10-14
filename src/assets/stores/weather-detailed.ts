@@ -40,11 +40,9 @@ export const useWeatherDetailed = create<IWeatherDetailedState>()(
         if (!res.ok) throw new Error('Failed to get Detailed Weather');
         const data = await res.json();
         if (data.cod.toString() === '404') {
-          console.log(data);
           set({ error: data.message });
         }
         if (data.cod.toString() === '200') {
-          console.log(data);
           set({ dataDetailed: data });
           set({ error: null });
         }

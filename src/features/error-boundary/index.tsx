@@ -14,7 +14,6 @@ const ErrorBoundary = ({ children }: ErrorBoundaryProps) => {
   useEffect(() => {
     if (error5Days || errorDetailed != null) {
       console.log('ERROR');
-      // useWeather5Days(enableError(errorText));
     }
   }, [errorDetailed, error5Days]);
 

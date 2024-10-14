@@ -5,9 +5,7 @@ import { AppRoutes } from './assets/routing';
 function App() {
   return (
     <ErrorBoundary>
-      <>
-        <AppRoutes />
-      </>
+      <AppRoutes />
     </ErrorBoundary>
   );
 }

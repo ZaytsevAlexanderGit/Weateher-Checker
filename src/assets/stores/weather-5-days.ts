@@ -27,7 +27,6 @@ export const useWeather5Days = create<IWeather5DaysState>()(
     set5DaysFakeWeather: () => {
       set({ loading: true });
       set({ data5Days: fake5DaysWeatherData });
-      console.log(fake5DaysWeatherData);
       set({ error: null });
       setTimeout(() => set({ loading: false }), 1000);
     },
@@ -42,11 +41,9 @@ export const useWeather5Days = create<IWeather5DaysState>()(
         const data = await res.json();
 
         if (data.cod.toString() === '404') {
-          console.log(data);
           set({ error: data.message });
         }
         if (data.cod.toString() === '200') {
-          console.log(data);
           set({ data5Days: data });
           set({ error: null });
         }

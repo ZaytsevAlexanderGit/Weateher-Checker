@@ -3,7 +3,7 @@ import { SetStateAction, useState } from 'react';
 
 import styles from './styles.module.css';
 
-const appKey = import.meta.env.VITE_API_REQUEST_LEY;
+const appKey = import.meta.env.VITE_API_REQUEST_KEY;
 
 export const Search = ({ onSearchChange }) => {
   const [search, setSearch] = useState(null);

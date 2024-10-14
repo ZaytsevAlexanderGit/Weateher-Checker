@@ -78,8 +78,24 @@ export const getWeatherCardsData = (
     const dateWeather = data.list.filter((item) => item.dt_txt.includes(date));
     weatherCards.push(getAverageWeatherData(dateWeather));
   }
-
-  console.log(weatherCards);
-
   return weatherCards;
+};
+
+export const getDirection = (deg: number): string | undefined => {
+  if (deg === 0) return 'С';
+  if (deg > 0 && deg < 45) return 'CСВ';
+  if (deg === 45) return 'CВ';
+  if (deg > 45 && deg < 90) return 'ВСВ';
+  if (deg === 90) return 'В';
+  if (deg > 90 && deg < 135) return 'ВЮВ';
+  if (deg === 135) return 'ЮВ';
+  if (deg > 135 && deg < 180) return 'ЮЮВ';
+  if (deg === 180) return 'Ю';
+  if (deg > 180 && deg < 225) return 'ЮЮЗ';
+  if (deg === 225) return 'ЮЗ';
+  if (deg > 225 && deg < 270) return 'ЗЮЗ';
+  if (deg === 270) return 'З';
+  if (deg > 270 && deg < 315) return 'ЗСЗ';
+  if (deg === 315) return 'СЗ';
+  if (deg > 315 && deg < 360) return 'ССЗ';
 };

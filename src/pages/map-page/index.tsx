@@ -1,48 +1,32 @@
-import styles from './styles.module.css';
-import { CSSProperties, useState } from 'react';
-import ClipLoader from 'react-spinners/ClipLoader';
+// import styles from './styles.module.css';
+import { useWeather5Days } from '../../assets/stores/weather-5-days.ts';
+import { useMediaQuery } from '../../shared/hooks';
+import { Breakpoints } from '../../shared/config';
 
 export function MapPage() {
-  const [loading, setLoading] = useState(true);
-  const override: CSSProperties = {
-    display: 'block',
-    margin: '0 auto',
-    borderColor: 'red',
-  };
-
-  const hideSpinner = () => {
-    setLoading(false);
-  };
+  const data5days = useWeather5Days((state) => state.data5Days);
+  let source = '';
+  const corner = 0.05;
+  source = `https://www.openstreetmap.org/export/embed.html?bbox=${data5days.city.coord.lon - corner}%2C${data5days.city.coord.lat - corner}%2C${data5days.city.coord.lon + corner}%2C${data5days.city.coord.lat + corner}&layer=mapnik`;
+  const isMobile = useMediaQuery(Breakpoints.L);
 
   return (
-    <>
-      {/*{loading === true ? (*/}
-      {/*  <ClipLoader*/}
-      {/*    color="#256"*/}
-      {/*    loading={loading}*/}
-      {/*    cssOverride={override}*/}
-      {/*    size={150}*/}
-      {/*    aria-label="Loading Spinner"*/}
-      {/*    data-testid="loader"*/}
-      {/*  />*/}
-      {/*) : (*/}
-      {/*  <></>*/}
-      {/*)}*/}
-      <>
-        <h1 className="text text_size_large .text_type_bold">КАРТА</h1>
-        <div style={{ position: 'relative', overflow: 'hidden' }}>
-          <iframe
-            className={styles.iframe}
-            src="https://yandex.ru/map-widget/v1/?ll=37.552997%2C55.679651&mode=poi&poi%5Bpoint%5D=37.550528%2C55.683935&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D1091123289&z=15.53"
-            width="560"
-            height="400"
-            loading="eager"
-            onLoad={() => hideSpinner()}
-            allowFullScreen={true}
-            style={{ position: 'relative' }}
-          ></iframe>
-        </div>
-      </>
-    </>
+    <div>
+      {data5days.city.name && (
+        <>
+          <h1 style={{ fontSize: '1.5rem', lineHeight: '1.25' }}>
+            Карта города {data5days.city.name}
+          </h1>
+          <iframe width="100%" height="400" src={source}></iframe>
+        </>
+      )}
+      {!data5days.city.name && isMobile && (
+        <>
+          <h1 className="text text_size_large .text_type_bold">
+            Сначала выберете город
+          </h1>
+        </>
+      )}
+    </div>
   );
 }
